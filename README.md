@@ -17,4 +17,10 @@ mvn test
 mvn package
 java -jar target/ojos-1.0-SNAPSHOT.jar server settings.yml
 ```
+
+# Format
+```
+mvn spotless:check
+mvn spotless:apply
+``
 # About

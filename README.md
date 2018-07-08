@@ -22,5 +22,6 @@ java -jar target/ojos-1.0-SNAPSHOT.jar server settings.yml
 ```
 mvn spotless:check
 mvn spotless:apply
-``
+```
+
 # About

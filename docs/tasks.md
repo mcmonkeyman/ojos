@@ -5,7 +5,7 @@
   * Test Captura Service
   * Test route
   * Test serialization
-* Add formatter
+* [Done] Add formatter
 * Validation
   * Json response modelled with errors
   * graceful error handling
@@ -16,13 +16,15 @@
   * /stats/domain/
   * /stats
 * Build fake Captura
-* Build other capture routes
+* Clean up config
+* Make image saving service
 
 
 # Nice to Have
 * Health Check
 * Image caching?
 * Load testing
+* Build other capture routes
 * Authentication and Authorisation
 * OAuth
 * Swagger [support](https://github.com/swagger-akka-http/swagger-akka-http)

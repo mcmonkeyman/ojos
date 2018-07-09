@@ -1,9 +1,8 @@
 package ie.eoin.sample.ojos.client;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -22,14 +21,12 @@ import ie.eoin.sample.ojos.api.ImageResponse;
 
 public class CapturaClient {
 
-  final HttpClient httpClient;
-  static final Logger log = LoggerFactory.getLogger(CapturaClient.class);
-  //    private static final String targetHost = "http://captura.com";
-  //    private static final String targetPath = "capture";
-  private static final String targetHost = "https://upload.wikimedia.org";
-  private static final String targetPath = "wikipedia/commons/d/d9/Test.png";
-  private static final String targetUrl = String.format("%s/%s", targetHost, targetPath);
-  private final ImageResponse defaultImage = new ImageResponse("/images/1x1.png");
+  private HttpClient httpClient;
+  static Logger log = LoggerFactory.getLogger(CapturaClient.class);
+  private String targetHost;
+  private String targetPath;
+  private String targetUrl;
+  private ImageResponse defaultImage = new ImageResponse("/images/1x1.png");
   private String imageCreationLog =
       "Could not create image from captura, details '%s'. returning default image to client.";
   private String requestProblemLog =
@@ -47,8 +44,15 @@ public class CapturaClient {
           put(504, "Capture site did not load in time");
         }
       };
+  private Path currentRelativePath = Paths.get("").toAbsolutePath().normalize();
+  private String imageFileBasePath =
+      Paths.get(currentRelativePath.toString(), "src", "main", "resources", "assets").toString();
+  private String imageFilePath = "images";
 
-  public CapturaClient(HttpClient httpClient) {
+  public CapturaClient(String host, String path, HttpClient httpClient) {
+    this.targetHost = host;
+    this.targetPath = path;
+    this.targetUrl = String.format("%s/%s", targetHost, targetPath);
     this.httpClient = httpClient;
   }
 
@@ -64,25 +68,18 @@ public class CapturaClient {
             public ImageResponse handleResponse(final HttpResponse response) {
 
               int status = response.getStatusLine().getStatusCode();
-              System.out.println(status);
               if (status == 200) {
                 HttpEntity entity = response.getEntity();
                 try {
-                  System.out.println("got in here");
-
-                  //                    java.nio.file.Path outputPath =
-                  // FileSystems.getDefault().getPath("src/main/resources/assets", fileName);
-
+                  String imageName = getImageName();
                   String newImageLocation =
-                      String.format(
-                          "/Users/eoconnor/code/dropwizard-experiment/ojos/src/main/resources/assets/images/%s.png",
-                          getImageName("thing"));
+                      String.format("%s/%s/%s", imageFileBasePath, imageFilePath, imageName);
                   InputStream instream = entity.getContent();
                   OutputStream outstream = new FileOutputStream(newImageLocation);
                   org.apache.commons.io.IOUtils.copy(instream, outstream);
                   outstream.close();
                   instream.close();
-                  return new ImageResponse(newImageLocation);
+                  return new ImageResponse(String.format("%s/%s", imageFilePath, imageName));
 
                 } catch (Exception e) {
                   System.out.println("threw exception");
@@ -124,12 +121,14 @@ public class CapturaClient {
     b.append(targetUrl);
     b.append("?url=");
     b.append(request.getUrl());
-    b.append("&dynamic_selector_size=");
-    b.append(request.getSelector());
+    if (request.getSelector() != null && !request.getSelector().isEmpty()) {
+      b.append("&dynamic_selector_size=");
+      b.append(request.getSelector());
+    }
     return b.toString();
   }
 
-  private String getImageName(String name) {
-    return String.format("%s-%s", name, UUID.nameUUIDFromBytes(name.getBytes()).toString());
+  private String getImageName() {
+    return String.format("%s.png", UUID.randomUUID().toString());
   }
 }

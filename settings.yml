@@ -1,6 +1,5 @@
-template: Hello, %s!
-defaultName: Stranger
-
+capturaHost: https://upload.wikimedia.org
+capturaPath: wikipedia/commons/d/d9/Test.png
 
 logging:
   level: DEBUG

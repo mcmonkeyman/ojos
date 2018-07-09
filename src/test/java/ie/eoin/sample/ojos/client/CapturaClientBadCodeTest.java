@@ -35,7 +35,7 @@ public class CapturaClientBadCodeTest extends Mockito {
     HttpClient httpClient = new FakeHttpClient(code);
 
     // and:
-    CapturaClient client = new CapturaClient(httpClient);
+    CapturaClient client = new CapturaClient("", "", httpClient);
 
     // then:
     ImageResponse result = client.getImage(emptyRequest);

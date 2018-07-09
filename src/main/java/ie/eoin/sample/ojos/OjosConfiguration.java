@@ -11,28 +11,28 @@ import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientConfiguration;
 
 public class OjosConfiguration extends Configuration {
-  @NotEmpty private String template;
 
-  @NotEmpty private String defaultName = "Stranger";
+  @NotEmpty private String capturaHost;
+  @NotEmpty private String capturaPath;
 
   @JsonProperty
-  public String getTemplate() {
-    return template;
+  public String getCapturaHost() {
+    return capturaHost;
   }
 
   @JsonProperty
-  public void setTemplate(String template) {
-    this.template = template;
+  public void setCapturaHost(String capturaHost) {
+    this.capturaHost = capturaHost;
   }
 
   @JsonProperty
-  public String getDefaultName() {
-    return defaultName;
+  public String getCapturaPath() {
+    return capturaPath;
   }
 
   @JsonProperty
-  public void setDefaultName(String name) {
-    this.defaultName = name;
+  public void setCapturaPath(String capturaPath) {
+    this.capturaPath = capturaPath;
   }
 
   @Valid @NotNull @JsonProperty

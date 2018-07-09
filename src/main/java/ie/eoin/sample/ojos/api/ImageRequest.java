@@ -25,6 +25,10 @@ public class ImageRequest {
     return selector;
   }
 
+  public void setSelector(String selector) {
+    this.selector = selector;
+  }
+
   @Override
   public String toString() {
     return "ImageRequest{" + "url=" + url + ", selector='" + selector + '\'' + '}';

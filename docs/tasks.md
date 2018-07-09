@@ -2,7 +2,7 @@
 * [Done] Build capture route
 * [Done] Build capture service 
 * Add Tests
-  * Test Captura Service
+  * [Done] Test Captura Service
   * Test route
   * Test serialization
 * [Done] Add formatter
@@ -15,9 +15,9 @@
   * Postgres db with requests
   * /stats/domain/
   * /stats
-* Build fake Captura
-* Clean up config
-* Make image saving service
+* [Done] Build fake Captura
+* [Done] Clean up config
+* Abstract image saving service
 
 
 # Nice to Have

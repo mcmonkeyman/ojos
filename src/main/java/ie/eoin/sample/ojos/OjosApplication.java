@@ -36,9 +36,8 @@ public class OjosApplication extends Application<OjosConfiguration> {
 
     final ImageResource resource =
         new ImageResource(
-            configuration.getTemplate(),
-            configuration.getDefaultName(),
-            new CapturaClient(httpClient));
+            new CapturaClient(
+                configuration.getCapturaHost(), configuration.getCapturaPath(), httpClient));
 
     environment.jersey().register(resource);
   }

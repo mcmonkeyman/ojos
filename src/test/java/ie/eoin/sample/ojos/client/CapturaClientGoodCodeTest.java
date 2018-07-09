@@ -12,7 +12,6 @@ import org.apache.http.client.entity.EntityBuilder;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
-import org.mockito.internal.matchers.Matches;
 
 import ie.eoin.sample.ojos.api.ImageRequest;
 import ie.eoin.sample.ojos.api.ImageResponse;
@@ -42,11 +41,10 @@ public class CapturaClientGoodCodeTest extends Mockito {
 
     // and:
     HttpClient httpClient = new FakeHttpClient(httpResponse);
-    CapturaClient client = new CapturaClient(httpClient);
+    CapturaClient client = new CapturaClient("", "", httpClient);
 
     // then:
     ImageResponse result = client.getImage(emptyRequest);
     Assert.assertNotEquals(result.getImageLocation(), defaultResponse.getImageLocation());
-    Assert.assertThat(result.getImageLocation(), new Matches(".*thing.*"));
   }
 }

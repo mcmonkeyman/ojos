@@ -26,3 +26,7 @@ mvn spotless:apply
 ```
 
 # About
+Based on 
+```
+mvn archetype:generate -DarchetypeGroupId=io.dropwizard.archetypes -DarchetypeArtifactId=java-simple -DarchetypeVersion=0.9.1
+```

@@ -9,6 +9,9 @@ cleanup:
 test:
 	mvn test
 
+format_check:
+	mvn spotless:check
+
 format:
 	mvn spotless:apply
 
@@ -24,4 +27,4 @@ update_versions:
 see_logs:
 	grep CapturaClient log/mylogger.log
 
-PHONY: run test format get post update_versions
+PHONY: run cleanup test format_check format get post update_versions see_logs

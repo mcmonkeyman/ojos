@@ -10,19 +10,17 @@ Take a look at [tasks](./docs/tasks.md) to see my thought process.
 
 # Test
 ```
-mvn test
+make test
 ```
 
 # Run
 ```
-mvn package
-java -jar target/ojos-1.0-SNAPSHOT.jar server settings.yml
+make run
 ```
 
 # Format
 ```
-mvn spotless:check
-mvn spotless:apply
+make format
 ```
 
 # About

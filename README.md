@@ -6,7 +6,7 @@ Take a look at [tasks](./docs/tasks.md) to see my thought process.
 
 # Requirements
 * Maven
-* Java 1.8
+* Java 10
 
 # Test
 ```

@@ -11,7 +11,7 @@
   * graceful error handling
   * Validate css selector 
 * Request Logging
-  * generate uuid and pass in header of request to captura and response to user
+  * [Done] generate uuid per request
   * Postgres db with requests
   * /stats/domain/
   * /stats

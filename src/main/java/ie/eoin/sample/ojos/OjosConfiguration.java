@@ -6,6 +6,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.serviceenabled.dropwizardrequesttracker.RequestTrackerConfiguration;
 
 import io.dropwizard.Configuration;
 import io.dropwizard.client.HttpClientConfiguration;
@@ -14,6 +15,8 @@ public class OjosConfiguration extends Configuration {
 
   @NotEmpty private String capturaHost;
   @NotEmpty private String capturaPath;
+  private RequestTrackerConfiguration requestTrackerConfiguration =
+      new RequestTrackerConfiguration();
 
   @JsonProperty
   public String getCapturaHost() {
@@ -40,5 +43,13 @@ public class OjosConfiguration extends Configuration {
 
   public HttpClientConfiguration getHttpClientConfiguration() {
     return httpClient;
+  }
+
+  public RequestTrackerConfiguration getRequestTrackerConfiguration() {
+    return requestTrackerConfiguration;
+  }
+
+  public void setRequestTrackerConfiguration(RequestTrackerConfiguration configuration) {
+    this.requestTrackerConfiguration = configuration;
   }
 }

@@ -28,6 +28,8 @@ public class CapturaClient {
   private String targetUrl;
   private ImageResponse defaultImage = new ImageResponse("/images/1x1.png");
   private String imageCreationLog =
+      "Created image from captura, details '%s'. returning default image to client.";
+  private String problemImageCreationLog =
       "Could not create image from captura, details '%s'. returning default image to client.";
   private String requestProblemLog =
       "Could not contact captura. caught '%s' while processing request <%s> :=> <%s>";
@@ -79,12 +81,14 @@ public class CapturaClient {
                   org.apache.commons.io.IOUtils.copy(instream, outstream);
                   outstream.close();
                   instream.close();
+                  log.debug(String.format(imageCreationLog, imageFilePath));
+
                   return new ImageResponse(String.format("%s/%s", imageFilePath, imageName));
 
                 } catch (Exception e) {
                   System.out.println("threw exception");
                   e.printStackTrace();
-                  log.debug(String.format(imageCreationLog, e.toString()));
+                  log.debug(String.format(problemImageCreationLog, e.toString()));
                   return defaultImage;
                 }
 

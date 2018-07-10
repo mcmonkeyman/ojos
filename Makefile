@@ -21,4 +21,7 @@ post:
 update_versions:
 	mvn versions:use-latest-versions
 
+see_logs:
+	grep CapturaClient log/mylogger.log
+
 PHONY: run test format get post update_versions

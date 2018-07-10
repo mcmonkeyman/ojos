@@ -3,17 +3,16 @@ capturaPath: wikipedia/commons/d/d9/Test.png
 
 logging:
   level: DEBUG
-  loggers:
-    "mylogger":
-      level: DEBUG
-      additive: false
-      appenders:
-        - type: file
-          currentLogFilename: ./log/mylogger.log
-          archivedLogFilenamePattern: ./log/mylogger-%d.log.gz
-          archivedFileCount: 5
   appenders:
+    - type: file
+      currentLogFilename: ./log/mylogger.log
+      archivedLogFilenamePattern: ./log/mylogger-%d.log.gz
+      archivedFileCount: 5
+      logFormat: '%d{ISO8601," + timeZone.getID() + "}] %X{Request-Tracker}: %c: %m%n%rEx'
+
+
     # Log warnings and errors to stderr
     - type: console
       threshold: DEBUG
       target: stderr
+      logFormat: '%d{ISO8601," + timeZone.getID() + "}] %X{Request-Tracker}: %c: %m%n%rEx'

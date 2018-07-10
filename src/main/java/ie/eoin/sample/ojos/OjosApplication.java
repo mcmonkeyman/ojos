@@ -2,6 +2,9 @@ package ie.eoin.sample.ojos;
 
 import org.apache.http.client.HttpClient;
 
+import com.serviceenabled.dropwizardrequesttracker.RequestTrackerBundle;
+import com.serviceenabled.dropwizardrequesttracker.RequestTrackerConfiguration;
+
 import ie.eoin.sample.ojos.client.CapturaClient;
 import ie.eoin.sample.ojos.resources.ImageResource;
 import io.dropwizard.Application;
@@ -24,6 +27,14 @@ public class OjosApplication extends Application<OjosConfiguration> {
   @Override
   public void initialize(final Bootstrap<OjosConfiguration> bootstrap) {
     bootstrap.addBundle(new AssetsBundle("/assets/images", "/images"));
+    bootstrap.addBundle(
+        new RequestTrackerBundle<OjosConfiguration>() {
+          @Override
+          public RequestTrackerConfiguration getRequestTrackerConfiguration(
+              OjosConfiguration configuration) {
+            return configuration.getRequestTrackerConfiguration();
+          }
+        });
   }
 
   @Override
